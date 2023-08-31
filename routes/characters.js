@@ -1,9 +1,8 @@
 const express = require("express");
 require("dotenv").config();
-// const apiMarvel = gYZV6LLC4pLZJ70H;
+
 const axios = require("axios");
 const router = express.Router();
-app.use(cors());
 
 router.get("/characters", async (req, res) => {
   try {

@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-app.use(cors());
 
 const axios = require("axios");
 const router = express.Router();
