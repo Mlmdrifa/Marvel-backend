@@ -3,6 +3,7 @@ require("dotenv").config();
 // const apiMarvel = gYZV6LLC4pLZJ70H;
 const axios = require("axios");
 const router = express.Router();
+app.use(cors());
 
 router.get("/characters", async (req, res) => {
   try {
@@ -16,11 +17,14 @@ router.get("/characters", async (req, res) => {
   }
 });
 router.get("/comics/:characterId", async (req, res) => {
+  const name = req.query.name || "";
+  const skip = req.query.skip || 0;
+  const limit = req.query.limit || 100;
   try {
     const characterId = req.params.characterId;
 
     const response = await axios.get(
-      `https://lereacteur-marvel-api.herokuapp.com/comics/${characterId}?apiKey=${process.env.API_KEY}`
+      `https://lereacteur-marvel-api.herokuapp.com/comics/${characterId}?apiKey=${process.env.API_KEY}&title=${name}&skip=${skip}&limit=${limit}`
     );
     res.json(response.data);
   } catch (error) {
