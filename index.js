@@ -4,12 +4,16 @@ app.use(express.json());
 require("dotenv").config();
 const cors = require("cors");
 app.use(cors());
+const mongoose = require("mongoose");
 
 const marvelComics = require("./routes/comics");
 app.use(marvelComics);
 
 const marvelPerso = require("./routes/characters");
 app.use(marvelPerso);
+
+const authRoutes = require("./routes/authentification");
+app.use(authRoutes);
 
 app.get("/", (req, res) => {
   try {
@@ -23,6 +27,6 @@ app.all("*", (req, res) => {
   res.json({ message: "Page not found" });
 });
 
-app.listen(process.env.PORT || 3000, (err, res) => {
+app.listen(process.env.PORT, (err, res) => {
   console.log("Server has started");
 });
