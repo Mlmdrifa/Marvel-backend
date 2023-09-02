@@ -40,7 +40,15 @@ router.post("/signup", async (req, res) => {
 
 router.get("/login", async (req, res) => {
   try {
-    res.json({ message: "signin to implement" });
+    // je coupe la chaine de caractere en detectant un espace, element à l'indice 1 le token et non le bearer
+    const token = req.headers.authorization.split(" ")[1];
+    const users = await User.find({ token });
+    console.log(users);
+    if (users.length === 0) {
+      res.status(404).json({ message: "utilisateur non connect" });
+    } else {
+      res.json({ token });
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
