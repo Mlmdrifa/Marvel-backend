@@ -6,6 +6,12 @@ const cors = require("cors");
 app.use(cors());
 const mongoose = require("mongoose");
 
+mongoose
+  .connect(
+    "mongodb+srv://DrifaM:X3v0rrA9PSVstREd@dmarvel.dxz38x6.mongodb.net/marvel"
+  )
+  .then(() => console.log("base connected"));
+
 const marvelComics = require("./routes/comics");
 app.use(marvelComics);
 
